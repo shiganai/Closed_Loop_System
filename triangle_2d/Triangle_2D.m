@@ -106,13 +106,20 @@ variables = [ddth1];
 [A,B] = equationsToMatrix(equations, variables);
 sol = simplify(inv(A) * B);
 
-ddth1_Eq = simplify(sol(1))
+ddth1_Eq = simplify(sol(1));
 
 f_X = subs(f_X, variables, sol');
 f_Y = subs(f_Y, variables, sol');
 d_M = subs(d_M, variables, sol');
 
 simplify(d_M - [f_X, f_Y - g * (m1 + m2 + m3)])
+
+matlabFunction(ddth1_Eq, 'file', 'find_Triangle_Ddth1.m', 'outputs', {'ddth1'})
+
+th2_Eq = subs(th2_Eq, syms_Replaced, syms_Replacing);
+th3_Eq = subs(th3_Eq, syms_Replaced, syms_Replacing);
+
+matlabFunction(th2_Eq, th3_Eq, 'file', 'find_Triangle_Th2_Th3.m', 'outputs', {'th2', 'th3'})
 
 
 
