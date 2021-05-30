@@ -119,7 +119,7 @@ matlabFunction(ddth1_Eq, 'file', 'find_Triangle_Ddth1.m', 'outputs', {'ddth1'})
 th2_Eq = subs(th2_Eq, syms_Replaced, syms_Replacing);
 th3_Eq = subs(th3_Eq, syms_Replaced, syms_Replacing);
 
-matlabFunction(th2_Eq, th3_Eq, 'file', 'find_Triangle_Th2_Th3.m', 'outputs', {'th2', 'th3'})
+matlabFunction(formula(th2_Eq), formula(th3_Eq), 'file', 'find_Triangle_Th2_Th3.m', 'outputs', {'th2', 'th3'})
 
 
 
