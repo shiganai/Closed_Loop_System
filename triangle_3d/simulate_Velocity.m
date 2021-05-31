@@ -3,11 +3,11 @@ clear all
 
 g = 1;
 l_Arm = 1;
-th1_0 = 1/2 * pi;
+th1_0 = 0/2 * pi;
 dth1_0 = 0;
-th2_0 = 1/2 * pi;
+th2_0 = 2/3 * pi;
 dth2_0 = 0;
-th3_0 = 1/2 * pi;
+th3_0 = -2/3 * pi;
 dth3_0 = 0;
 phi1_0 = 0;
 % dphi1_0 = 0;
@@ -17,6 +17,10 @@ phi3_0 = -2/3 * pi;
 % dphi3_0 = 0;
 
 [dphi1_0,dphi2_0,dphi3_0] = find_Ds_Velocity(dth1_0,dth2_0,dth3_0,l_Arm,phi1_0,phi2_0,phi3_0,th1_0,th2_0,th3_0);
+
+if isnan(dphi1_0)
+    error('dphi1_0 = NaN')
+end
 
 tau1 = 0;
 tau2 = 0;
