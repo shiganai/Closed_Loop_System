@@ -25,7 +25,7 @@ m3 = 1;
 k = 1e3;
 
 q_0 = [th1_0, dth1_0, th2_0, dth2_0, th3_0, dth3_0, phi1_0, dphi1_0, phi2_0, dphi2_0, phi3_0, dphi3_0]';
-t = 0:1e-1:200;
+t = 0:1e-1:20;
 
 [time, q] = ode45(@(t,q) ddt(t, q, g, l_Arm, m1, m2, m3, tau1, tau2, tau3), t, q_0);
 
@@ -60,7 +60,7 @@ zlim(anime.axAnime, plot_Lim)
 view(anime.axAnime, [0,-1,0])
 
 dockfig(1)
-plot(time, p3)
+plot(time, [th1, th3])
 
 
 

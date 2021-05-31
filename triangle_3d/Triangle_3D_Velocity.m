@@ -68,18 +68,18 @@ restraint_Acceleration = diff(restraint, t, t);
 restraint_Velocity = subs(restraint_Velocity, [x_Pre, y_Pre, z_Pre], sym([0, 0, 0]));
 restraint_Velocity = subs(restraint_Velocity, syms_Replaced, syms_Replacing);
 
-variables_Velocity = [dphi1, dphi2, dphi3];
+variables_Velocity = [dth3, dphi2, dphi3];
 [A,B] = equationsToMatrix(restraint_Velocity, variables_Velocity);
 sol_Velocity = inv(A) * B;
 
-dphi1_Eq = sol_Velocity(1);
+dth3_Eq = sol_Velocity(1);
 dphi2_Eq = sol_Velocity(2);
 dphi3_Eq = sol_Velocity(3);
 
-% job = createJob(c);
-% createTask(job, @matlabFunction, 1,{dphi1_Eq, dphi2_Eq, dphi3_Eq, 'file', 'find_Ds_Velocity.m', 'outputs', {'dphi1', 'dphi2', 'dphi3'}});
-% submit(job)
-% job.Tasks
+job = createJob(c);
+createTask(job, @matlabFunction, 1,{dth3_Eq, dphi2_Eq, dphi3_Eq, 'file', 'find_Ds_Velocity.m', 'outputs', {'dth3', 'dphi2', 'dphi3'}});
+submit(job)
+job.Tasks
 
 %% Solve Newton Eq
 
@@ -152,7 +152,7 @@ f_Y_Eq = sol(8);
 f_Z_Eq = sol(9);
 toc
 
-%{/
+%{
 tic
 F_X = subs(F_X, variables, sol');
 toc
@@ -168,13 +168,13 @@ toc
 %}
 
 tic
-simplify(d_M - [F_X + f_X_Eq, F_Y + f_Y_Eq, F_Z + f_Z_Eq])
+% simplify(d_M - [F_X + f_X_Eq, F_Y + f_Y_Eq, F_Z + f_Z_Eq])
 toc
 
-% job = createJob(c);
-% createTask(job, @matlabFunction, 1,{ddth1_Eq, ddth2_Eq, ddth3_Eq, 'file', 'find_Dds_Velocity.m', 'outputs', {'ddth1', 'ddth2', 'ddth3'}});
-% submit(job)
-% job.Tasks
+job = createJob(c);
+createTask(job, @matlabFunction, 1,{ddth1_Eq, ddth2_Eq, ddphi1_Eq, 'file', 'find_Dds_Velocity.m', 'outputs', {'ddth1', 'ddth2', 'ddphi1'}});
+submit(job)
+job.Tasks
 
 %{
 job = createJob(c);
