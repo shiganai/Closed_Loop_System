@@ -1,4 +1,6 @@
 
+clear all
+
 syms l_Arm real
 syms th1_Pre(t) th2_Pre(t) th3_Pre(t)
 syms m1 m2 m3 real

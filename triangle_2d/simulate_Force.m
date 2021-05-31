@@ -6,6 +6,8 @@ l_Arm = 1;
 th1_0 = 0;
 dth1_0 = 0;
 [th2_0, th3_0] = find_Triangle_Th2_Th3(th1_0);
+dth2_0 = 0;
+dth3_0 = 0;
 tau1 = 0;
 tau2 = 0;
 tau3 = 0;
@@ -13,15 +15,17 @@ m1 = 1;
 m2 = 1;
 m3 = 1;
 
-q_0 = [th1_0, dth1_0]';
+q_0 = [th1_0, dth1_0, th2_0, dth2_0, th3_0, dth3_0]';
 t = 0:1e-2:100;
 
-[time, q] = ode45(@(t,q) ddt(t, q, g, l_Arm, m1, m2, tau1, tau2, tau3), t, q_0);
+[time, q] = ode45(@(t,q) ddt_Force(t, q, g, l_Arm, m1, m2, tau1, tau2, tau3), t, q_0);
 
 th1 = q(:,1);
 dth1 = q(:,2);
-
-[th2,th3] = find_Triangle_Th2_Th3(th1);
+th2 = q(:,3);
+dth2 = q(:,4);
+th3 = q(:,5);
+dth3 = q(:,6);
 
 p0 = zeros(size(time, 1), 2);
 p1 = l_Arm * [cos(th1), sin(th1)];
@@ -39,7 +43,7 @@ ylim(anime.axAnime, [-1, 1])
 zlim(anime.axAnime, [-1, 1])
 view(anime.axAnime, [0,-1,0])
 
-dockfig(1)
+dockfig(2)
 plot(time, p2)
 
 
