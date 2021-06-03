@@ -16,7 +16,7 @@ dphi2_0 = 0;
 phi3_0 = 2/2 * pi;
 dphi3_0 = 0;
 
-tau1 = 1;
+tau1 = 0;
 tau2 = 0;
 tau3 = 0;
 m1 = 1;
