@@ -318,6 +318,7 @@ equations = [
 equations = subs(equations, syms_Replaced, syms_Replacing);
 
 toc
+fprintf('方程式の準備完了\n')
 % tic
 % equations = subs(equations, variables_Velocity, sol_Velocity');
 % toc
@@ -333,9 +334,11 @@ variables = [ddalpha_Body, ddbeta_Body, ddgamma_Body, ddr_Alpha_Hand, ddr_Beta_H
 
 [A, B] = equationsToMatrix(equations, variables);
 toc
+fprintf('方程式解き始め\n')
 tic
 X = inv(A)*B;
 toc
+fprintf('方程式解き終わり\n')
 
 parallel.defaultClusterProfile('local');
 c = parcluster();
